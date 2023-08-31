@@ -5,10 +5,27 @@ from django.contrib.messages import constants
 from django.contrib.auth import authenticate, login, logout
 
 
-# Create your views here.
+def logar(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    
+    if request.method == 'POST':
+        username = request.POST.get('nome')
+        senha = request.POST.get('senha')
 
-def login(request):
-    pass
+        credenciais = authenticate(request, username=username, password=senha)
+
+        if credenciais != None:
+            login(request, credenciais)
+            return redirect('/divulgar/')
+        else:
+            messages.add_message(request, constants.ERROR, 'Usuário ou senha incorretos')
+            return render(request, 'login.html')
+
+
+def sair(request):
+    logout(request)
+    return redirect('/auth/login/')
 
 
 def cadastro(request):
@@ -18,22 +35,22 @@ def cadastro(request):
     if request.method == 'POST':
         username = request.POST.get('nome')
         email = request.POST.get('email')
-        senha1 = request.POST.get('senha')
-        senha2 = request.POST.get('confirmar_senha')
+        senha = request.POST.get('senha')
+        senha1 = request.POST.get('confirmar_senha')
 
         # verificar se os campos foram preenchidos
-        for campo in [username, email, senha1]:
+        for campo in [username, email, senha]:
             if len(campo.strip()) == 0 or len(campo.strip()) == None:
                 messages.add_message(request, constants.ERROR, 'Preencha corretamente todos os campos')
                 return render(request, 'cadastro.html')
             
         # verificar se senhas são iguais
-        if senha1 != senha2:
+        if senha != senha1:
             messages.add_message(request, constants.ERROR, 'As senhas devem ser iguais')
             return render(request, 'cadastro.html')
         
         # verifica se senha é maior de 4 caracteres
-        if len(senha1) < 4:
+        if len(senha) < 4:
             messages.add_message(request, constants.WARNING, 'As senhas devem ter 4 caracteres no mínimo')
             return render(request, 'cadastro.html')
         
@@ -46,7 +63,7 @@ def cadastro(request):
 
         # Cadastra o usuário ou retorna erro
         try:
-            usuario = User.objects.create_user(username=username, email=email, password=senha1)
+            usuario = User.objects.create_user(username=username, email=email, password=senha)
             messages.add_message(request, constants.SUCCESS, 'Usuário adicionado com sucesso!')
             return render(request, 'cadastro.html')
         except:

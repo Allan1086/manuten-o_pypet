@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings 
 
 urlpatterns = [
-    path('login/', login, name='login'),
+    path('login/', logar, name='login'),
     path('cadastro/', cadastro, name='cadastro'),
+    path('logout/', sair, name='logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
