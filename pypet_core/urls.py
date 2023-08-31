@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('usuarios.urls')),
     path('divulgar/', include('divulgar.urls')),
+    path('adotar/', include('adotar.urls')),
 
 ] 
 

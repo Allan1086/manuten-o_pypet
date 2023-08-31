@@ -53,3 +53,4 @@ def remover_pet(request, id):
         pets = Pet.objects.filter(usuario=request.user)
         messages.add_message(request, constants.ERROR, 'Voce só pode remover seus Pets!')
         return render(request, 'seus_pets.html', {'pets': pets})
+    
