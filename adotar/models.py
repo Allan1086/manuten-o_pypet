@@ -10,6 +10,7 @@ class Pedido_Adocao(models.Model):
         ('RE', 'Rejeitado'),
     ]
     adotante = models.ForeignKey(User, on_delete=models.CASCADE)
+    email_adotante = models.CharField(max_length=200, default='sememail@gmail.com')
     dono_pet = models.CharField(max_length=120, default='admin')
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     data_solicitacao = models.DateTimeField()

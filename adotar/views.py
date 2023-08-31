@@ -31,10 +31,12 @@ def solicitar_adocao(request, id):
             pet = pet.first(),
             dono_pet = usuario_dono,
             adotante = request.user,
+            email_adotante = request.user.email,
             data_solicitacao = datetime.now(),)
 
         pedido.save()
         messages.add_message(request, constants.SUCCESS, 'Pedido realizado com sucesso!')
         return redirect('/adotar')
+
 
         

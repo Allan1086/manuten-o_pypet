@@ -24,13 +24,12 @@
                                     <img class="card-img-top" src="{{pedido.pet.foto.url}}">
                                     <div class="card-body">
                                         <h1 class="card-title">{{pedido.adotante}}</h1>
-                                        <span class="span-bold2">Telefone:</span>
-                                        <p>{{pedido.pet.telefone}}</p>
-                                        
-                                        <span class="span-bold2">Cidade:</span>
-                                        <p>{{pedido.pet.cidade}}</p>
+                                        <span class="span-bold2">Email do interessado:</span>
+                                        <p class="fw-bolder fs-5">{{pedido.email_adotante}}</p>
+                                        <span class="span-bold2">Data do Pedido:</span>
+                                        <p>{{pedido.data_solicitacao}}</p>
                                         <a href="" class="btn btn-success btn-lg">Aprovar</a>
-                                        <a href="" class="btn btn-danger btn-lg">Recusar</a>
+                                        <a href="" class="btn btn-danger btn-lg">Remover</a>
                                     </div>
                                 </div>
                             </div>
