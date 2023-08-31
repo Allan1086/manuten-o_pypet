@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from divulgar.models import *
 from divulgar.forms import *
+from adotar.models import *
 
 # Create your views here.
 
@@ -54,3 +55,9 @@ def remover_pet(request, id):
         messages.add_message(request, constants.ERROR, 'Voce só pode remover seus Pets!')
         return render(request, 'seus_pets.html', {'pets': pets})
     
+
+@login_required
+def pedidos(request):
+    if request.method == 'GET':
+        pedidos = Pedido_Adocao.objects.filter(status_pedido='AG').filter(dono_pet=request.user)
+        return render(request, 'pedidos.html', {'pedidos': pedidos})
