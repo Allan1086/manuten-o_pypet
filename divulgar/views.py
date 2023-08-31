@@ -21,7 +21,7 @@ def cadastrar_pet(request):
             pet.usuario = request.user
             pet.save()
             messages.add_message(request, constants.SUCCESS, 'Pet cadastrado com sucesso!')
-            return render(request, 'castrar_pets.html')
+            return render(request, 'cadastrar_pets.html')
         else:
             messages.add_message(request, constants.ERROR, 'Não foi possivel cadastrar, verifique os dados')
             return render(request, 'cadastrar_pets.html', {'form':form})
@@ -31,4 +31,25 @@ def cadastrar_pet(request):
 def seus_pets(request):
     if request.method == 'GET':
         pets = Pet.objects.filter(usuario=request.user)
+        return render(request, 'seus_pets.html', {'pets': pets})
+    
+
+@login_required
+def detalhar_pet(request, id):
+    if request.method == 'GET':
+        pets = Pet.objects.filter(id=id)
+        return render(request, 'detalhar_pet.html', {'pets': pets})
+    
+
+@login_required
+def remover_pet(request, id):
+    pet = Pet.objects.get(pk=id)
+    if pet.usuario == request.user:
+        pet.delete()
+        pets = Pet.objects.filter(usuario=request.user)
+        messages.add_message(request, constants.WARNING, 'Pet removido com sucesso!')
+        return render(request, 'seus_pets.html', {'pets': pets})
+    else:
+        pets = Pet.objects.filter(usuario=request.user)
+        messages.add_message(request, constants.ERROR, 'Voce só pode remover seus Pets!')
         return render(request, 'seus_pets.html', {'pets': pets})

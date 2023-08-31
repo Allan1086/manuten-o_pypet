@@ -46,7 +46,7 @@
                                     <tr class="tabela-linha">
                                        
                                         <td width="20%">
-                                            <img width="40%" src="{{pet.foto.url}}">
+                                           <a href="{% url 'detalhar_pet' pet.id %}"><img width="40%" src="{{pet.foto.url}}"></a> 
                                         </td>
                                         <td>
                                             {{pet.nome}}
@@ -59,7 +59,7 @@
                                             {{pet.status}}
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-danger">REMOVER</a>
+                                            <a href="{% url 'remover_pet' pet.id %}" class="btn btn-danger">REMOVER</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
