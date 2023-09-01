@@ -61,3 +61,21 @@ def pedidos(request):
     if request.method == 'GET':
         pedidos = Pedido_Adocao.objects.filter(status_pedido='AG').filter(dono_pet=request.user)
         return render(request, 'pedidos.html', {'pedidos': pedidos})
+    
+@login_required
+def processar_pedido(request, id):
+    status = request.GET.get('status')
+    pedido = Pedido_Adocao.objects.get(id=id)
+    pet = Pet.objects.get(id=pedido.pet.id)
+   
+    if status == 'Aprovado':
+        pedido.status_pedido = 'AP'
+        pet.status = 'Adotado'
+        pet.save()
+    
+    if status == 'Recusado':
+        pedido.status_pedido = 'RE'
+        
+    pedido.save()
+
+    return redirect('/adotar')

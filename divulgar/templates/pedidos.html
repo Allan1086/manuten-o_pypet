@@ -28,8 +28,8 @@
                                         <p class="fw-bolder fs-5">{{pedido.email_adotante}}</p>
                                         <span class="span-bold2">Data do Pedido:</span>
                                         <p>{{pedido.data_solicitacao}}</p>
-                                        <a href="" class="btn btn-success btn-lg">Aprovar</a>
-                                        <a href="" class="btn btn-danger btn-lg">Remover</a>
+                                        <a href="{% url 'processar_pedido' pedido.id %}?status=Aprovado" class="btn btn-success btn-lg">Aprovar</a>
+                                        <a href="{% url 'processar_pedido' pedido.id %}?status=Recusado" class="btn btn-danger btn-lg">Recusar</a>
                                     </div>
                                 </div>
                             </div>

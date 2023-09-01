@@ -12,7 +12,19 @@ from datetime import datetime
 def listar_pets(request):
     if request.method == 'GET':
         pets = Pet.objects.all()
-        return render(request, 'listar_pets.html', {'pets': pets})
+        racas = Raca.objects.all()
+
+        cidade = request.GET.get('cidade')
+        raca_filtro = request.GET.get('raca')
+
+        if cidade != None:
+            pets = pets.filter(cidade__icontains=cidade)
+
+        if raca_filtro:
+            pets= pets.filter(raca=raca_filtro) 
+        
+        return render(request, 'listar_pets.html', {'pets':pets, 'racas':racas})
+
     
 @login_required
 def solicitar_adocao(request, id):
