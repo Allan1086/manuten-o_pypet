@@ -22,8 +22,15 @@ PyPet é totalmente integrado ao Django Admin, uma poderosa ferramenta que possi
 2. Instale as dependências: `pip install -r requirements.txt`
 3. Realize as migrações do Django: `python manage.py migrate`
 4. Execute o servidor: `python manage.py runserver`
-5. Acesse no navegador: `http://127.0.0.1:8000/`
+5. Acesse no navegador: `http://127.0.0.1:8000/auth/login`
 
-## Contribuições
+## Imagens do Sistema
 
-Estamos sempre abertos a melhorias! Se você deseja contribuir, sinta-se à vontade para criar um *pull request*.
+<p align="left">
+  <img src="/assets/img1.jpeg" width="350" title="Legenda da Imagem">
+  <img src="/assets/img2.jpeg" width="350" title="Legenda da Imagem">
+  <img src="/assets/img3.jpeg" width="350" title="Legenda da Imagem">
+  <img src="/assets/img4.jpeg" width="350" title="Legenda da Imagem">
+  <img src="/assets/img5.jpeg" width="350" title="Legenda da Imagem">
+</p>
+
